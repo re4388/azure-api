@@ -5,8 +5,10 @@
       "type": "httpTrigger",
       "direction": "in",
       "name": "req",
-      "methods": ["get"],
-      "route": "hello"
+      "methods": [
+        "get", "post"
+      ],
+      "route": "hi"
     },
     {
       "type": "http",

@@ -1,0 +1,27 @@
+{
+  "bindings": [
+    {
+      "authLevel": "anonymous",
+      "type": "httpTrigger",
+      "direction": "in",
+      "name": "req",
+      "methods": ["post"]
+    },
+    {
+      "type": "http",
+      "direction": "out",
+      "name": "res"
+    },
+    {
+      "type": "cosmosDB",
+      "name": "qa",
+      "databaseName": "func-io-learn-db",
+      "collectionName": "qa_v01",
+      "connectionStringSetting": "comos-20200615_DOCUMENTDB",
+      "id": "{id}",
+      "partitionKey": "{id}",
+      "direction": "in"
+    }
+  ],
+  "disabled": false
+}

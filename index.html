@@ -5,28 +5,119 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
     <title>Vanilla JavaScript App</title>
-    <style>
-      #getMessage {
-        text-align: center;
-        margin-top: 100px;
-      }
-    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
   </head>
 
   <body>
     <main>
-      <h1>Vanilla JavaScript App</h1>
+      <h1>Azure: Static Host x Serverless API</h1>
     </main>
-
-    <br />
-    <p>Loading message from the API...</p>
-    <br />
-    <h1 id="getMessage"></h1>
     <script>
-      (async function () {
-        let { text } = await (await fetch(`/api/hereWeAre`)).json();
-        document.querySelector("#getMessage").textContent = text;
-      })();
+      $(function () {
+
+
+        /* Just a simple GET, sanity check */
+        $(".bt1").click(function () {
+          fetch("/api/hello/", {
+            mode: "no-cors",
+          })
+            .then((response) => response.json())
+            .then((myJson) => console.log(myJson));
+        });
+
+
+        /* just a simple post, sanity check */
+        let data = { name: "MUEN" };
+        $(".bt2").click(function () {
+          fetch(`/api/hi/`, {
+            method: "POST", // or 'PUT'
+            body: JSON.stringify(data), // data can be `string` or {object}!
+            headers: new Headers({
+              "Content-Type": "application/json",
+            }),
+          })
+            .then((res) => res.json())
+            .catch((error) => console.error("Error:", error))
+            .then((response) => console.log("Success:", response));
+        });
+
+
+
+
+        /* check qa data via id */
+        let data2 = { id: "2" };
+        $(".bt3").click(function () {
+          fetch(`/api/find-qa`, {
+            method: "POST",
+            body: JSON.stringify(data2),
+            headers: new Headers({
+              "Content-Type": "application/json",
+            }),
+          })
+            .then((res) => res.json())
+            .catch((error) => console.error("Error:", error))
+            .then((response) => console.log("Success:", response));
+        });
+
+
+
+        /* add qa data */
+        let addData = {
+          id: "2qqq",
+          username: "benhu",
+          keyowrd: "covid199",
+          quesiton: "covid199",
+          numberOfPaper: '123',
+        };
+        $(".bt4").click(function () {
+          fetch(`/api/add-qa`, {
+            method: "POST",
+            body: JSON.stringify(addData),
+            headers: new Headers({
+              "Content-Type": "application/json",
+            }),
+          })
+            .then((res) => res.json())
+            .catch((error) => console.error("Error:", error))
+            .then((response) => console.log("Success:", response));
+        });
+
+
+
+
+
+
+      });
     </script>
+
+    <div class="bt1 d-flex justify-content-center mb-3">
+      <button type="button" class="btn btn-primary">
+        GET /api/hello
+      </button>
+    </div>
+
+    <div class="bt2 d-flex justify-content-center mb-3">
+      <button type="button" class="btn btn-primary">
+        POST /api/hi
+      </button>
+    </div>
+
+    <div class="bt3 d-flex justify-content-center mb-3">
+      <button type="button" class="btn btn-primary">
+        POST /api/find-qa
+      </button>
+    </div>
+
+    <div class="bt4 d-flex justify-content-center mb-3">
+      <button type="button" class="btn btn-primary">
+        POST /api/add-qa
+      </button>
+    </div>
   </body>
 </html>
