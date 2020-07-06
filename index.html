@@ -55,10 +55,7 @@
         $(".bt3").click(function () {
           fetch(`/api/find-qa`, {
             method: "POST",
-            body: JSON.stringify(data2),
-            headers: new Headers({
-              "Content-Type": "application/json",
-            }),
+            body: JSON.stringify(data2)
           })
             .then((res) => res.json())
             .catch((error) => console.error("Error:", error))
@@ -69,10 +66,10 @@
 
         /* add qa data */
         let addData = {
-          id: "hahahahahahaha",
+          id: "10",
           username: "benhu",
-          keyowrd: "covid199",
-          quesiton: "covid199",
+          keyowrd: "covid19",
+          quesiton: "no question",
           numberOfPaper: '123',
         };
 
@@ -80,9 +77,6 @@
           fetch(`/api/add-qa`, {
             method: "POST",
             body: JSON.stringify(addData),
-            headers: new Headers({
-              "Content-Type": "application/json",
-            }),
           })
             .then((res) => res.json())
             .catch((error) => console.error("Error:", error))
